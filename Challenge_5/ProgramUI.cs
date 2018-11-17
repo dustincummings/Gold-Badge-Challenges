@@ -121,14 +121,19 @@ namespace Challenge_5
             Console.WriteLine("Which customer would you like to update? Please type in their email address.");
             foreach(Customer customer in customerList)
             {
-                Console.WriteLine($"{customer.FirstName}\t{customer.LastName}\t{customer.EmailAddress}");
+                Console.WriteLine($"{customer.FirstName}\t{customer.LastName}\t{customer.EmailAddress}\t{customer.Type}");
             }
             var updateCustomer = Console.ReadLine();
-            foreach( Customer customer in customerList)
-            {
-                if(updateCustomer == customer.EmailAddress)
-                {
 
+            Console.WriteLine("Please type in the new customer type?");
+            string input = Console.ReadLine();
+
+
+            foreach(Customer customer in customerList)
+            {
+                if(customer.EmailAddress == updateCustomer)
+                {
+                    
                 }
             }
             
