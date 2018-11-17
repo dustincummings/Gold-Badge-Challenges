@@ -62,9 +62,10 @@ namespace Challenge_5
             customer.FirstName = Console.ReadLine();
             Console.WriteLine("What is customer's last name?");
             customer.LastName = Console.ReadLine();
+            Console.WriteLine("What is this customer's email address?");
+            customer.EmailAddress = Console.ReadLine();
             Console.WriteLine("Is this a Past, Present, or Potential customer");
             string input = Console.ReadLine();
-            Console.WriteLine("What is this customer's email address?");
             switch (input)
             {
                 case "Past":
@@ -117,6 +118,7 @@ namespace Challenge_5
         private void UpdateCustomerInfo()
         {
             List<Customer> customerList = _customerRepo.ShowCustomerList();
+            Customer newCustomerType = new Customer();
             Console.Clear();
             Console.WriteLine("Which customer would you like to update? Please type in their email address.");
             foreach(Customer customer in customerList)
@@ -125,7 +127,7 @@ namespace Challenge_5
             }
             var updateCustomer = Console.ReadLine();
 
-            Console.WriteLine("Please type in the new customer type?");
+            Console.WriteLine("Please type in the new customer type? Past, Present, or Potential");
             string input = Console.ReadLine();
 
 
@@ -133,10 +135,21 @@ namespace Challenge_5
             {
                 if(customer.EmailAddress == updateCustomer)
                 {
-                    
+                    switch (input)
+                    {
+                        case "Past":
+                            newCustomerType.Type = CustomerType.Past;
+                            break;
+                        case "Present":
+                            newCustomerType.Type = CustomerType.Present;
+                            break;
+                        case "Potential":
+                            newCustomerType.Type = CustomerType.Potential;
+                            break;
+                    }
                 }
             }
-            
+            _customerRepo.AddCustomer(newCustomerType);
         }
     }
 }

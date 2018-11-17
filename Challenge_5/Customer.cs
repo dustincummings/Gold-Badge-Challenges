@@ -21,7 +21,7 @@ namespace Challenge_5
             LastName = lastName;
             Type = type;
             Email = email;
-            EmailAddress = EmailAddress;
+            EmailAddress = emailAddress;
         }
 
         public Customer()
