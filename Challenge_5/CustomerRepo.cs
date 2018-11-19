@@ -28,16 +28,5 @@ namespace Challenge_5
                 }
                 return _customerList;
         }
-        //public List<Customer> UpdateCustomer()
-        //{
-        //    foreach(Customer customer in _customerList)
-        //    {
-               
-        //    }
-        //    return 
-        //}
-        
-
-
     }
 }

@@ -88,10 +88,10 @@ namespace Challenge_5
             Console.Clear();
             List<Customer> customersList = _customerRepo.ShowCustomerList();
 
-            Console.WriteLine("FirstName\t LastName\t Status\t Email");
+            Console.WriteLine("FirstName\t LastName\t Status\t\t\t Email");
             foreach (Customer customer in customersList)
             {
-                Console.WriteLine($"{customer.FirstName:5}\t{customer.LastName:5}\t{customer.Type:5}\t{customer.Email}");
+                Console.WriteLine($"{customer.FirstName,-15}\t{customer.LastName,-15}\t{customer.Type,-15}\t{customer.Email,-15}");
             }
             Console.ReadLine();
         }
@@ -118,75 +118,43 @@ namespace Challenge_5
         private void UpdateCustomerInfo()
         {
             List<Customer> customerList = _customerRepo.ShowCustomerList();
-            //Customer newCustomerType = new Customer();
             Console.Clear();
             Console.WriteLine("Which customer would you like to update? Please type in their email address.");
             foreach(Customer customer in customerList)
             {
-                Console.WriteLine($"{customer.FirstName}\t{customer.LastName}\t{customer.EmailAddress}\t{customer.Type}");
+                Console.WriteLine($"{customer.FirstName,-15}\t{customer.LastName,-15}\t{customer.EmailAddress,-15}\t{customer.Type}");
             }
             var updateCustomer = Console.ReadLine();
             foreach (Customer customer in customerList)
             {
                 if (updateCustomer == customer.EmailAddress)
                 {
-                    _customerRepo.DeleteCustomer(customer);
-                    break;
+                    Console.WriteLine($"Please enter in customer's first name?");
+                    customer.FirstName = Console.ReadLine();
+                    Console.WriteLine("Enter in customer's last name?");
+                    customer.LastName = Console.ReadLine();
+                    Console.WriteLine("Enter in customer's email address?");
+                    customer.EmailAddress = Console.ReadLine();
+                    Console.WriteLine("What is the new status of this customer? Past, Present, or Potential customer");
+                    string input = Console.ReadLine().ToLower();
+                    switch (input)
+                    {
+                        case "past":
+                            customer.Type = CustomerType.Past;
+                            customer.Email = "We are currently having a 10 % discount on new client";
+                            break;
+                        case "present":
+                            customer.Type = CustomerType.Present;
+                            customer.Email = "Thank for being a loyal customer. We will be giving you a 15% discount for the next 2 months.";
+                            break;
+                        case "potential":
+                            customer.Type = CustomerType.Potential;
+                            customer.Email = "Its been a long time since we have heard from you.Please consider us again.";
+                            break;
+                    }
+
                 }
             }
-            {
-                Customer customer = new Customer();
-                Console.Clear();
-                Console.WriteLine("What is customer's first name?");
-                customer.FirstName = Console.ReadLine();
-                Console.WriteLine("What is customer's last name?");
-                customer.LastName = Console.ReadLine();
-                Console.WriteLine("What is this customer's email address?");
-                customer.EmailAddress = Console.ReadLine();
-                Console.WriteLine("Is this a Past, Present, or Potential customer");
-                string input = Console.ReadLine();
-                switch (input)
-                {
-                    case "Past":
-                        customer.Type = CustomerType.Past;
-                        customer.Email = "We are currently having a 10 % discount on new client";
-                        break;
-                    case "Present":
-                        customer.Type = CustomerType.Present;
-                        customer.Email = "Thank for being a loyal customer. We will be giving you a 15% discount for the next 2 months.";
-                        break;
-                    case "Potential":
-                        customer.Type = CustomerType.Potential;
-                        customer.Email = "Its been a long time since we have heard from you.Please consider us again.";
-                        break;
-                }
-                _customerRepo.AddCustomer(customer);
-            }
-            //Console.WriteLine("Please type in the new customer type? Past, Present, or Potential");
-            //string input = Console.ReadLine();
-
-
-            //foreach(Customer customer in customerList)
-            //{
-            //    if(customer.EmailAddress == updateCustomer)
-            // {
-            //switch (input)
-            //{
-            //    case "Past":
-            //        newCustomerType.Type = CustomerType.Past;
-            //        break;
-            //    case "Present":
-            //        newCustomerType.Type = CustomerType.Present;
-            //        break;
-            //    case "Potential":
-            //        newCustomerType.Type = CustomerType.Potential;
-            //        break;
-            //}
-            //        updateCustomer.Replace($"{customer.Type}",$"{input}");
-            //} 
-            //}
-            // }
-
         }
     }
 }
